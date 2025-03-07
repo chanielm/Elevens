@@ -1,5 +1,4 @@
 /*
-
 Class: Deck
 	FIELDS:
 	- cards: List<Card>
@@ -9,13 +8,12 @@ Class: Deck
 	+ Shuffle(): void
 	+ TakeTopCard(): Card?
 	+ IsEmpty(): bool
-
 */
 
 class Deck {
     List<Card> cards;
 
-    Deck() {
+    public Deck() {
         cards = [];
 
         foreach (Suit s in Enum.GetValues<Suit>())

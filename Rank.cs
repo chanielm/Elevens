@@ -14,7 +14,6 @@ Enumeration: Rank
     Jack        10
     Queen       11
     King        12
-
 */
 
 enum Rank {
