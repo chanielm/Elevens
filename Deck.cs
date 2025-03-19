@@ -44,8 +44,8 @@ class Deck {
     }
 
     // Returns true if the List containing the cards is empty. False otherwise.
-    public bool IsEmpty() {
-        return cards.Count == 0;
-    }
+    public bool IsEmpty() { return cards.Count == 0; }
+
+    public int Count() { return cards.Count; }
 }
 

@@ -8,32 +8,67 @@ Class: ElevensGame
 	METHODS:
 	+ ElevensGame()
 	+ ValidMovePossible(): bool
-    + SelectCards(): List<int>
+    + SelectCards(): void
     + Replace(int): void
     + ValidateFaceCards(List<int>): bool
 	+ ValidateEleven(List<int>): bool
 */
 
 class ElevensGame {
-    List<Card> table;
+    List<Card?> table;
     Deck deck;
 
-    public List<Card> Table { get; private set; }
+    public List<Card?> Table { get { return table; } }
     public List<int> Selection { get; set; }
 
     public ElevensGame() {
         deck = new();
-        table = new();
+        table = [];
+        Selection = [];
 
-        for (int i = 0; i < 10; i++) {
-            Card? add = deck.TakeTopCard();
-            if (add == null) break;
-        }
+        deck.Shuffle();
+        for (int i = 0; i < 10; i++) table.Add(deck.TakeTopCard());
     }
 
     // TODO: ValidMovePossible()
     // TODO: SelectCards()
+    public void SelectCards() {
+        Selection = [];
+        int select;
+
+        Console.WriteLine($"\nTABLE ({deck.Count() + Table.Count} left):");
+        for (int i = 0; i < table.Count; i++) Console.WriteLine($"{i}. {table[i].ToString()}");
+
+        do {
+            Console.WriteLine("Select a Card index from 0 to 9. Enter -1 to stop selecting.");
+            if (int.TryParse(Console.ReadLine(), out select)) {
+                if (select > 9 || select < 0) { if (select != -1) Console.WriteLine("Invalid Index."); }
+                else if (!Selection.Contains(select)) Selection.Add(select);
+                else Console.WriteLine("Already selected.");
+            }
+            else Console.WriteLine("An integer, please.");
+        } while (select != -1);
+
+        Console.Write("You selected: ");
+        foreach (int n in Selection) Console.Write($"{n} ");
+    }
+
     // TODO: Replace(int)
+    public void ReplaceSelected() {
+        foreach (int i in Selection) {
+            table[i] = null;
+
+            Card? next = deck.TakeTopCard();
+            if (next != null) table.Add(next);
+        }
+        
+        for (int i = 0; i < table.Count; i++) {
+            if (table[i] == null) {
+                table.RemoveAt(i);
+                i--;
+            }
+        }
+    }
 
     // Returns true if Jack, Queen, and King were selected. Return false otherwise.
     public bool ValidateFaceCards(List<int> indices) {

@@ -21,4 +21,8 @@ class Card {
         this.Suit = s;
         this.Rank = r;
     }
+
+    public override string ToString() {
+        return Rank + " of " + Suit;
+    }
 }
