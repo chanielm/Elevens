@@ -15,10 +15,10 @@ Class: ElevensGame
 */
 
 class ElevensGame {
-    List<Card?> table;
+    List<Card> table;
     Deck deck;
 
-    public List<Card?> Table { get { return table; } }
+    public List<Card> Table { get { return table; } }
     public List<int> Selection { get; set; }
 
     public ElevensGame() {
@@ -31,7 +31,7 @@ class ElevensGame {
     }
 
     // TODO: ValidMovePossible()
-    // TODO: SelectCards()
+
     public void SelectCards() {
         Selection = [];
         int select;
@@ -53,20 +53,15 @@ class ElevensGame {
         foreach (int n in Selection) Console.Write($"{n} ");
     }
 
-    // TODO: Replace(int)
     public void ReplaceSelected() {
-        foreach (int i in Selection) {
-            table[i] = null;
+        Selection.Sort();
+        Selection.Reverse();
 
+        foreach (int i in Selection) {
+            table.RemoveAt(i);
+            
             Card? next = deck.TakeTopCard();
             if (next != null) table.Add(next);
-        }
-        
-        for (int i = 0; i < table.Count; i++) {
-            if (table[i] == null) {
-                table.RemoveAt(i);
-                i--;
-            }
         }
     }
 
