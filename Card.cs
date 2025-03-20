@@ -1,8 +1,5 @@
 /*
 Class: Card
-	FIELDS:
-	- suit: Suit
-	- rank: Rank
 	PROPERTIES:
 	+ Suit: Suit
 	+ Rank: Rank
@@ -11,9 +8,6 @@ Class: Card
 */
 
 class Card {
-    Suit suit;
-    Rank rank;
-
     public Suit Suit { get; private set; }
     public Rank Rank { get; private set; }
 
@@ -23,6 +17,23 @@ class Card {
     }
 
     public override string ToString() {
-        return Rank + " of " + Suit;
+        string res = "";
+        res += Rank switch {
+            Rank.Ace    => "A",
+            Rank.Jack   => "J",
+            Rank.Queen  => "Q",
+            Rank.King   => "K",
+            _           => (int)Rank + 1,
+        };
+
+        res += Suit switch {
+            Suit.Spades     => "\u2660",
+            Suit.Clubs      => "\u2663",
+            Suit.Diamonds   => "\u2666",
+            Suit.Hearts     => "\u2665",
+            _               => "?" // this line should never be used
+        };
+
+        return res;
     }
 }

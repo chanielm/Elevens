@@ -2,22 +2,23 @@
 {
     public static void Main(String[] args)
     {
+        // this part of the program only exists for debugging.
         ElevensGame e = new();
 
-        do
+        while (e.ValidMovePossible())
         {
             e.SelectCards();
-            if (e.ValidateEleven(e.Selection))
-            {
+            if (e.ValidateEleven(e.Selection)) {
                 Console.WriteLine("These Cards Add to 11. Removing...");
                 e.ReplaceSelected();
             }
-            else if (e.ValidateFaceCards(e.Selection))
-            {
+            else if (e.ValidateFaceCards(e.Selection)) {
                 Console.WriteLine("These are unique face cards. Removing...");
                 e.ReplaceSelected();
             }
             else Console.WriteLine("Invalid Selection.");
-        } while (true);
+        }
+        Console.WriteLine("GAME OVER");
+        e.SelectCards();
     }
 }
