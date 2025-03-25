@@ -1,19 +1,3 @@
-/*
-Class: ElevensGame
-	FIELDS:
-	- table: List<Card>
-	- deck: Deck
-	PROPERTIES:
-	+ SelectionList: List<int>
-	METHODS:
-	+ ElevensGame()
-	+ ValidMovePossible(): bool
-    + SelectCards(): void
-    + Replace(int): void
-    + ValidateFaceCards(List<int>): bool
-	+ ValidateEleven(List<int>): bool
-*/
-
 class ElevensGame {
     List<Card> table;
     Deck deck;
@@ -56,10 +40,16 @@ class ElevensGame {
         int select;
 
         Console.WriteLine($"\nTABLE ({deck.Count() + Table.Count} left):");
-        for (int i = 0; i < table.Count; i++) Console.WriteLine($"{i}. {table[i].ToString()}");
+        for (int i = 0; i < table.Count; i++) {
+            if (i % 5 == 0 && i != 0) Console.WriteLine();
+            if (table[i].Rank > Rank.Ten) Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write($"{i}: {table[i].ToString()}\t");
+
+            Console.ResetColor();
+        }
 
         do {
-            Console.WriteLine("Select a Card index from 0 to 9. Enter -1 to stop selecting.");
+            Console.WriteLine("\nSelect a Card index from 0 to 9. Enter -1 to stop selecting.");
             if (int.TryParse(Console.ReadLine(), out select)) {
                 if (select > table.Count - 1 || select < 0) { if (select != -1) Console.WriteLine("Invalid Index."); }
                 else if (!Selection.Contains(select)) Selection.Add(select);
@@ -67,9 +57,6 @@ class ElevensGame {
             }
             else Console.WriteLine("An integer, please.");
         } while (select != -1);
-
-        Console.Write("You selected:\n");
-        foreach (int n in Selection) Console.Write($"{n}. {table[n]}\n");
     }
 
     // Remove the cards at the indices listed in 'Selection' and add new cards to take their place.

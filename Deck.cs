@@ -1,15 +1,3 @@
-/*
-Class: Deck
-	FIELDS:
-	- cards: List<Card>
-	PROPERTIES:
-	METHODS:
-	+ Deck()
-	+ Shuffle(): void
-	+ TakeTopCard(): Card?
-	+ IsEmpty(): bool
-*/
-
 class Deck {
     List<Card> cards;
 

@@ -1,12 +1,3 @@
-/*
-Class: Card
-	PROPERTIES:
-	+ Suit: Suit
-	+ Rank: Rank
-	METHODS:
-	+ Card(Suit, Rank)
-*/
-
 class Card {
     public Suit Suit { get; private set; }
     public Rank Rank { get; private set; }

@@ -9,16 +9,23 @@
         {
             e.SelectCards();
             if (e.ValidateEleven(e.Selection)) {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("These Cards Add to 11. Removing...");
                 e.ReplaceSelected();
             }
             else if (e.ValidateFaceCards(e.Selection)) {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("These are unique face cards. Removing...");
                 e.ReplaceSelected();
             }
-            else Console.WriteLine("Invalid Selection.");
+            else {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invalid Selection.");
+            }
+            Console.ResetColor();
         }
-        Console.WriteLine("GAME OVER");
-        e.SelectCards();
+        Console.BackgroundColor = ConsoleColor.Red;
+        Console.Write("GAME OVER");
+        Console.ResetColor();
     }
 }
