@@ -1,3 +1,6 @@
+## 3/27/2025
+- Added restart functionality
+
 ## 3/25/2025
 - Changed the method cards are selected
 

@@ -42,10 +42,10 @@ class ElevensGame {
         Console.ForegroundColor = ConsoleColor.Black;
         Console.Write($"\nTABLE ({deck.Count() + Table.Count} left):");
         Console.ResetColor();
-        Console.WriteLine("");
+        Console.Write("\n");
 
         for (int i = 0; i < table.Count; i++) {
-            if (i % 5 == 0 && i != 0) Console.WriteLine();
+            if (i % 5 == 0 && i != 0) Console.Write("\n");
 
             if (table[i].Rank > Rank.Ten) Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write($"{i}: [{table[i].ToString()}] \t");
