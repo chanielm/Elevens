@@ -35,28 +35,51 @@ class ElevensGame {
         return jack && queen && king;
     }
 
-    public void SelectCards() {
-        Selection = [];
-        int select;
+    public bool GameWon() { return deck.Count() < 1; }
 
-        Console.WriteLine($"\nTABLE ({deck.Count() + Table.Count} left):");
+    public void PrintTable() {
+        Console.BackgroundColor = ConsoleColor.White;
+        Console.ForegroundColor = ConsoleColor.Black;
+        Console.Write($"\nTABLE ({deck.Count() + Table.Count} left):");
+        Console.ResetColor();
+        Console.WriteLine("");
+
         for (int i = 0; i < table.Count; i++) {
             if (i % 5 == 0 && i != 0) Console.WriteLine();
-            if (table[i].Rank > Rank.Ten) Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write($"{i}: {table[i].ToString()}\t");
 
+            if (table[i].Rank > Rank.Ten) Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write($"{i}: [{table[i].ToString()}] \t");
             Console.ResetColor();
         }
+    }
 
+    public void SelectCards() {
+        Selection = [];
+        string? input;
+        
         do {
-            Console.WriteLine("\nSelect a Card index from 0 to 9. Enter -1 to stop selecting.");
-            if (int.TryParse(Console.ReadLine(), out select)) {
-                if (select > table.Count - 1 || select < 0) { if (select != -1) Console.WriteLine("Invalid Index."); }
-                else if (!Selection.Contains(select)) Selection.Add(select);
-                else Console.WriteLine("Already selected.");
+            Console.Write("\nEnter the indices of the cards you wish to select, separated by commas: ");
+            input = Console.ReadLine();
+            
+            if (input == null) continue;
+            foreach (string str in input.Split(',')) {
+                if (int.TryParse(str.Trim(), out int n))
+
+                if (n < 0 || n > 9) {
+                    BadOutput("An negative index or index greater than 9 was found. Please reenter.");
+                    Selection = [];
+                    break;
+                }
+                else if (Selection.Contains(n)) {
+                    BadOutput("A duplicate index was found. Please reenter.");
+                    Selection = [];
+                    break;
+                }
+                else Selection.Add(n);
+                
+                else BadOutput("A non integer was found. Please reenter.");
             }
-            else Console.WriteLine("An integer, please.");
-        } while (select != -1);
+        } while (Selection.Count < 1);
     }
 
     // Remove the cards at the indices listed in 'Selection' and add new cards to take their place.
@@ -98,5 +121,11 @@ class ElevensGame {
         }
 
         return sum == 11;
+    }
+
+    private static void BadOutput(string message) {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.Write(message);
+        Console.ResetColor();
     }
 }

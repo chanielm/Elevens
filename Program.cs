@@ -1,31 +1,39 @@
 ﻿class Program
 {
-    public static void Main(String[] args)
+    static void Main()
     {
-        // this part of the program only exists for debugging.
         ElevensGame e = new();
 
         while (e.ValidMovePossible())
         {
+            e.PrintTable();
             e.SelectCards();
             if (e.ValidateEleven(e.Selection)) {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("These Cards Add to 11. Removing...");
+                Console.Write("These Cards Add to 11. Removing...");
                 e.ReplaceSelected();
             }
             else if (e.ValidateFaceCards(e.Selection)) {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("These are unique face cards. Removing...");
+                Console.Write("These are unique face cards. Removing...");
                 e.ReplaceSelected();
             }
             else {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Invalid Selection.");
+                Console.Write("Invalid Selection.");
             }
             Console.ResetColor();
         }
-        Console.BackgroundColor = ConsoleColor.Red;
-        Console.Write("GAME OVER");
-        Console.ResetColor();
+
+        if (e.GameWon()) {
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.Write("\nDeck is empty... YOU WIN!");
+            Console.ResetColor();
+        }
+        else {
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.Write("\nNo valid moves possible... GAME OVER.");
+            Console.ResetColor();
+        }
     }
 }

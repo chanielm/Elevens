@@ -1,5 +1,8 @@
+## 3/25/2025
+- Changed the method cards are selected
+
 ## 3/20/2025
-- All 'ElevensGame' methods implemented to an extent
+- All 'ElevensGame' methods implemented
   - ValidMovePossible
 - Changed how cards are displayed visually (using numbers and icons instead of words)
 
