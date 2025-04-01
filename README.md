@@ -1,25 +1,12 @@
-## 3/27/2025
-- Added restart functionality
+# CSC350H-ELEVENS
+Elevens is a console app in which the user selects pairs of cards that add to 11 from a table of 10 cards until the deck is exhausted. The user may also select 3 unique face cards (Jack, Queen, King) to remove from the table as well.
 
-## 3/25/2025
-- Changed the method cards are selected
+Once the deck is exhausted and the table is empty, the user has won. If the user reaches a point where no pair of cards adds to 11, the user has lost. Once a game ends, the user is given the option to restart.
 
-## 3/20/2025
-- All 'ElevensGame' methods implemented
-  - ValidMovePossible
-- Changed how cards are displayed visually (using numbers and icons instead of words)
+This project is developed solely by Chaniel Mays.
 
-## 3/19/2025
-- 'ElevensGame' still partially implemented
-  - ReplaceSelected (partial)
-  - SelectCards (partial)
-- Fixed issue where ReplaceSelected() would replace the wrong cards
+## Prerequisites
+To be added.
 
-## 'Elevens' Implementation as of 3/7/2025
-- Implemented 'Suit' and 'Rank' enums
-- Implemented 'Card' class
-- Implemented 'Deck' class
-- Partially implemented 'ElevensGame' class
-  - Constructor
-  - ValidateFaceCards
-  - ValidateEleven
+## Getting Started
+To be added.
