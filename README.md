@@ -9,9 +9,9 @@ This project is developed solely by Chaniel Mays.
 ### Prerequisites
 Install the [.NET SDK](https://dotnet.microsoft.com/en-us/download) if not installed already.
 
-Clone this repository by entering `git clone https://github.com/chanielm/Elevens.git` into the command line OR [download this repository](https://github.com/chanielm/Elevens/archive/refs/heads/main.zip) and unzip the contents.
+Clone this repository by entering `git clone https://github.com/chanielm/Elevens.git` into the command line **OR** [download this repository](https://github.com/chanielm/Elevens/archive/refs/heads/main.zip) and unzip the contents.
 
-_If you choose to download this repository, the repository folder may be named `Elevens-main` instead of `Elevens`. Use whichever name appears in place of `Elevens` if it is different._
+_If you choose to download this repository, the repository folder may be named `Elevens-main` instead of `Elevens`. Use whichever name that the repository folder has in place of `Elevens` if it is different._
 
 ### Visual Studio Code
 1. Open the repository.
@@ -21,8 +21,14 @@ _If you choose to download this repository, the repository folder may be named `
 3. Click on the triangle at the top right corner that has the label "Run project associated with this file".
 
 ### Command Line
-1. Change your directory to the repository using `cd [path-to-repo]\Elevens`, replacing `[path-to-repo]` with the path that leads to the repository.
+1. Change your directory to the repository using `cd [path-to-repo]\Elevens`.
 
 2. Run the project using `dotnet run`.
 
-Alternatively, you may use `dotnet run --project [path-to-repo]\Elevens` to avoid changing directories.
+*This is also possible using Visual Studio Code's integrated terminal.*
+
+Alternatively, you may use `dotnet run --project [path-to-repo]\Elevens` to avoid changing directories. Replace `[path-to-repo]` with the path that leads to the repository.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
