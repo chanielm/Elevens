@@ -5,8 +5,24 @@ Once the deck is exhausted and the table is empty, the user has won. If the user
 
 This project is developed solely by Chaniel Mays.
 
-## Prerequisites
-To be added.
+## Local Setup
+### Prerequisites
+Install the [.NET SDK](https://dotnet.microsoft.com/en-us/download) if not installed already.
 
-## Getting Started
-To be added.
+Clone this repository by entering `git clone https://github.com/chanielm/Elevens.git` into the command line OR [download this repository](https://github.com/chanielm/Elevens/archive/refs/heads/main.zip) and unzip the contents.
+
+_If you choose to download this repository, the repository folder may be named `Elevens-main` instead of `Elevens`. Use whichever name appears in place of `Elevens` if it is different._
+
+### Visual Studio Code
+1. Open the repository.
+
+2. Open "Program.cs", or any .cs file within the repository.
+
+3. Click on the triangle at the top right corner that has the label "Run project associated with this file".
+
+### Command Line
+1. Change your directory to the repository using `cd [path-to-repo]\Elevens`, replacing `[path-to-repo]` with the path that leads to the repository.
+
+2. Run the project using `dotnet run`.
+
+Alternatively, you may use `dotnet run --project [path-to-repo]\Elevens` to avoid changing directories.
