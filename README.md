@@ -3,8 +3,6 @@ Elevens is a console app in which the user selects pairs of cards that add to 11
 
 Once the deck is exhausted and the table is empty, the user has won. If the user reaches a point where no pair of cards adds to 11, the user has lost. Once a game ends, the user is given the option to restart.
 
-This project is developed solely by Chaniel Mays.
-
 ## Local Setup
 ### Prerequisites
 Install the [.NET SDK](https://dotnet.microsoft.com/en-us/download) if not installed already.
