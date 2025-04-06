@@ -1,6 +1,7 @@
 class ElevensGame {
     List<Card> table;
     Deck deck;
+    bool endKeyPressed;
 
     public List<Card> Table { get { return table; } }
     public List<int> Selection { get; private set; }
@@ -9,10 +10,16 @@ class ElevensGame {
         deck = new();
         table = [];
         Selection = [];
+        endKeyPressed = false;
     }
 
     // Run the game.
     public void Run() {
+        Console.Clear();
+        Console.WriteLine("Welcome to ELEVENS! Press [ENTER] to start a game.");
+        Console.WriteLine("TIP: Enter 'E' at any point if you'd like to end the current game.");
+        Console.ReadLine();
+
         string? again;
         do {
             // Initialization
@@ -20,10 +27,7 @@ class ElevensGame {
             table = [];
 
             deck.Shuffle();
-            for (int i = 0; i < 10; i++) {
-                Card? c = deck.TakeTopCard();
-                if (c != null) table.Add(c);
-            }
+            for (int i = 0; i < 10; i++) table.Add(deck.TakeTopCard()!);
 
             // Game Flow
             while (ValidMovePossible())
@@ -31,25 +35,27 @@ class ElevensGame {
                 Console.Clear();
                 PrintTable();
                 SelectCards();
-                if (ValidateEleven(Selection)) {
+                if (endKeyPressed) break;
+
+                if (ValidateEleven(Selection) || ValidateFaceCards(Selection)) {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write("The cards selected add to 11. Removing...");
-                    ReplaceSelected();
-                }
-                else if (ValidateFaceCards(Selection)) {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write("The cards selected are unique face cards. Removing...");
+                    Console.Write("Removing...");
                     ReplaceSelected();
                 }
                 else {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("The cards selected are not a pair that add to 11 and are not unique face cards.");
                 }
+
                 Thread.Sleep(1000);
                 Console.ResetColor();
             }
-
-            if (GameWon()) {
+            if (endKeyPressed) {
+                Console.BackgroundColor = ConsoleColor.DarkGray;
+                Console.Write("\nEnd key was pressed... Ending game...");
+                Console.ResetColor();
+            }
+            else if (GameWon()) {
                 Console.BackgroundColor = ConsoleColor.DarkGreen;
                 Console.Write("\nDeck is empty... YOU WIN!");
                 Console.ResetColor();
@@ -64,8 +70,10 @@ class ElevensGame {
             again = Console.ReadLine();
         } while (again != null && again.ToUpper().Equals("Y"));
 
+        Console.Clear();
         Console.WriteLine("\"Elevens\" was closed.");
     }
+
     // Check if any pair of cards in the list adds to eleven.
     // If none add to eleven, check if a set of unique face cards (J, Q, K) is present.
     // False if neither conditions are true.
@@ -84,6 +92,8 @@ class ElevensGame {
         return jack && queen && king;
     }
 
+    // Prompt the user to select an arbitrary number of cards. Checks for non integers and out of range.
+    // Populates 'Selection' with the user's selected indices once method is complete.
     public void SelectCards() {
         Selection = [];
         string? input;
@@ -91,8 +101,13 @@ class ElevensGame {
         do {
             Console.Write("\nEnter the indices of the cards you wish to select, separated by commas: ");
             input = Console.ReadLine();
-            
+        
             if (input == null) continue;
+            if (input.Equals("E", StringComparison.CurrentCultureIgnoreCase)) {
+                endKeyPressed = true;
+                return;
+            }
+
             foreach (string str in input.Split(',')) {
                 if (int.TryParse(str.Trim(), out int n)) {
                     if (n < 0 || n >= table.Count) {
@@ -117,7 +132,7 @@ class ElevensGame {
     }
 
     // Remove the cards at the indices listed in 'Selection' and add new cards to take their place.
-    // if 'deck' is empty, doesn't add anything.
+    // If 'deck' is empty, doesn't add anything.
     public void ReplaceSelected() {
         Selection.Sort();
         Selection.Reverse();
@@ -127,6 +142,7 @@ class ElevensGame {
             
             Card? next = deck.TakeTopCard();
             if (next != null) table.Add(next);
+            else break;
         }
     }
 
@@ -158,10 +174,10 @@ class ElevensGame {
         return sum == 11;
     }
 
-    public bool GameWon() { return deck.Count() < 1; }
+    public bool GameWon() { return deck.Count() + table.Count == 0; }
 
     public void PrintTable() {
-        Console.WriteLine($"\nTABLE ({deck.Count() + Table.Count} left):");
+        Console.WriteLine($"TABLE ({deck.Count() + Table.Count} left):");
 
         for (int i = 0; i < table.Count; i++) {
             if (i % 5 == 0 && i != 0) Console.Write("\n");
